@@ -15,6 +15,7 @@ import com.project.memo.VO.MemoImageVO
 import com.project.memo.VO.MemoVO
 import kotlinx.android.synthetic.main.activity_add_memo.*
 import kotlinx.android.synthetic.main.activity_memo_detail.*
+import java.io.File
 import java.nio.file.Files.delete
 
 class MemoDetailActivity : AppCompatActivity() {
@@ -100,6 +101,10 @@ class MemoDetailActivity : AppCompatActivity() {
             deleteImageAll(id!!,this)   // 메모이미지 테이블에 이미지 전부 삭제
             finish()
         }
+        for(i in 0..imageList.size-1){
+            Log.d("@@@@ ","  $i")
+            imageFileDelete(i)
+        }
         var dialog_listener = object: DialogInterface.OnClickListener{
             override fun onClick(dialog: DialogInterface?, p1: Int) {
                 when(p1){
@@ -112,7 +117,15 @@ class MemoDetailActivity : AppCompatActivity() {
         dialog.show()
 
     }
-
+    // 이미지 파일 삭제
+    fun imageFileDelete(position:Int){
+        var file = File(imageList.get(position))
+        if(file.exists()){
+            file.delete()
+        }else{
+            Log.d(TAG, " 삭제 실패 ")
+        }
+    }
 
 
 }
