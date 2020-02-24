@@ -323,7 +323,7 @@ class AddMemoActivity : AppCompatActivity() {
         var height = bitmap.getHeight();
 
         var matrix = Matrix()
-        matrix.postRotate(angle.toFloat());
+        matrix.postRotate(angle.toFloat()); // 받은값 만큼 이미지 회전
 
         var resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
         bitmap.recycle();
