@@ -108,9 +108,12 @@ class AddMemoActivity : AppCompatActivity() {
                 Log.d("TAG", "권한 설정 요청");
                 ActivityCompat.requestPermissions( this, arrayOf(
                     Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.INTERNET), 1 );
+                    Manifest.permission.INTERNET), 1 )
             }
+        }else{
+            addDialog()
         }
+
     }
 
     // 이미지 추가 다이얼로그

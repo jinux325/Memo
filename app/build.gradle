@@ -45,5 +45,5 @@ dependencies {
 
     // tedimagepicker 라이브러리
     // https://github.com/ParkSangGwon/TedImagePicker
-    implementation 'gun0912.ted:tedimagepicker:1.0.8'
+    implementation 'gun0912.ted:tedimagepicker:1.0.9'
 }
