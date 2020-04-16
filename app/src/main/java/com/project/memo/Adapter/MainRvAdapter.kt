@@ -14,13 +14,13 @@ import kotlinx.android.synthetic.main.activity_main_recyclerview_item.view.*
 
 
 class MainRvAdapter(itemView: View): RecyclerView.ViewHolder(itemView) {
-    val memoTitle = itemView.memoTitle
-    val memoContent = itemView.memoContent
-    val memoImage = itemView.memoImage
-    val cardView = itemView.card_view
+    val memoTitle = itemView.memoTitle!!
+    val memoContent = itemView.memoContent!!
+    val memoImage = itemView.memoImage!!
+    val cardView = itemView.card_view!!
 }
 
-class Adapter(val context: Context, private val mainRvList:MutableList<MemoMainVO>): RecyclerView.Adapter<MainRvAdapter>(){
+class Adapter(private val context: Context, private val mainRvList:MutableList<MemoMainVO>): RecyclerView.Adapter<MainRvAdapter>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainRvAdapter {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_main_recyclerview_item,parent, false)
         return MainRvAdapter(view)
@@ -31,10 +31,10 @@ class Adapter(val context: Context, private val mainRvList:MutableList<MemoMainV
     }
 
     override fun onBindViewHolder(holder: MainRvAdapter, position: Int) {
-        val id = mainRvList.get(position).id
-        val content = mainRvList.get(position).content
-        val title = mainRvList.get(position).title
-        val image = mainRvList.get(position).image
+        val id = mainRvList[position].id
+        val content = mainRvList[position].content
+        val title = mainRvList[position].title
+        val image = mainRvList[position].image
 
         // 상세페이지로 이동 버튼 이벤트
         holder.cardView.setOnClickListener {

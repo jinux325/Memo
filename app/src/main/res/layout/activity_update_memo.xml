@@ -10,13 +10,14 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:textStyle="bold"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:text="제목"
         android:textColor="@color/colorPrimary"
         android:padding="3dp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
     <EditText
         android:id="@+id/update_title"
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintBottom_toTopOf="@+id/update_background"
         android:inputType="text"
-        />
+        tools:ignore="Autofill,HardcodedText" />
     <View
         android:id="@+id/update_background"
         android:layout_width="match_parent"
@@ -43,14 +44,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:textStyle="bold"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:text="내용"
         android:textColor="@color/colorPrimary"
         android:padding="3dp"
         app:layout_constraintTop_toBottomOf="@+id/update_background"
-        app:layout_constraintBottom_toTopOf="@+id/update_content"/>
+        app:layout_constraintBottom_toTopOf="@+id/update_content"
+        tools:ignore="HardcodedText" />
     <EditText
         android:id="@+id/update_content"
         android:layout_width="match_parent"
@@ -62,7 +64,7 @@
         android:background="@null"
         app:layout_constraintTop_toBottomOf="@+id/content"
         app:layout_constraintBottom_toTopOf="@+id/update_background_view"
-        />
+        tools:ignore="Autofill,HardcodedText" />
 
     <ImageView
         android:id="@+id/update_imageView"
@@ -73,7 +75,7 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/update_content"
         app:layout_constraintBottom_toTopOf="@+id/update_background_view"
-        />
+        tools:ignore="ContentDescription" />
 
     <View
         android:id="@+id/update_background_view"
@@ -103,11 +105,11 @@
         android:background="@drawable/button"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:windowSoftInputMode="adjustResize"
         app:layout_constraintRight_toLeftOf="@id/updateBtn"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/updateBtn"
@@ -119,8 +121,9 @@
         android:background="@drawable/button"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
-        android:windowSoftInputMode="adjustResize" />
+        android:layout_marginEnd="10dp"
+        android:windowSoftInputMode="adjustResize"
+        tools:ignore="HardcodedText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout >

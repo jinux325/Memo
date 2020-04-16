@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,7 +11,7 @@
         android:layout_height="match_parent"
         android:id="@+id/detail_viewPager_imageView"
 
-        />
+        tools:ignore="ContentDescription" />
     <TextView
         android:id="@+id/detail_imagesCount"
         android:layout_width="wrap_content"
@@ -20,7 +21,6 @@
         android:textColor="@color/design_default_color_error"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="5dp"
-        android:text="n/n"
+        android:layout_marginEnd="5dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

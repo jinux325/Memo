@@ -1,5 +1,6 @@
 package com.project.memo.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -23,7 +24,7 @@ private const val TITLE = "title"
 private const val CONTENT = "content"
 private const val IMAGE = "image"
 private const val MEMOID = "memoId"
-private val TAG : String ="DBHelper"
+private const val TAG : String ="DBHelper"
 
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null,DATABASE_VERSION) {
@@ -67,9 +68,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 *  content : 내용
 *  context : context
 * */
+@SuppressLint("Recycle")
 fun memoInsert(title:String, content:String, context:Context){
     val db = DBHelper(context).writableDatabase
-    db.execSQL("insert into $DB_TABLE ($TITLE, $CONTENT) " + "values (?,?)", arrayOf<Any?>(title,content))
+    db.execSQL("insert into $DB_TABLE ($TITLE, $CONTENT) values (?,?)", arrayOf<Any?>(title,content))
     db.close()
 }
 
@@ -79,9 +81,10 @@ fun memoInsert(title:String, content:String, context:Context){
 *  images  : 이미지 경로
 *  context : context
 * */
+@SuppressLint("Recycle")
 fun imageInsert(id:Int,images:String, context:Context){
     val db = DBHelper(context).writableDatabase
-    db.execSQL("insert into $DB_IMAGE ($MEMOID, $IMAGE) " + "values (?,?)", arrayOf<Any?>(id, images))
+    db.execSQL("insert into $DB_IMAGE ($MEMOID, $IMAGE) values (?,?)", arrayOf<Any?>(id, images))
     db.close()
 }
 
@@ -90,9 +93,10 @@ fun imageInsert(id:Int,images:String, context:Context){
 *  id      : tb_memo id
 *  context : context
 * */
+@SuppressLint("Recycle")
 fun deleteMemo(id:Int, context:Context){
     val db = DBHelper(context).writableDatabase
-    db.execSQL("delete from $DB_TABLE " + "where _id=?", arrayOf<Any?>(id))
+    db.execSQL("delete from $DB_TABLE where _id=?", arrayOf<Any?>(id))
     db.close()
 }
 /* delete
@@ -100,9 +104,10 @@ fun deleteMemo(id:Int, context:Context){
 *  id      : tb_memo id
 *  context : context
 * */
+@SuppressLint("Recycle")
 fun deleteImageAll(id:Int, context:Context){
     val db = DBHelper(context).writableDatabase
-    db.execSQL("delete from $DB_IMAGE " + "where $MEMOID=?", arrayOf<Any?>(id))
+    db.execSQL("delete from $DB_IMAGE where $MEMOID=?", arrayOf<Any?>(id))
     db.close()
 }
 
@@ -111,9 +116,10 @@ fun deleteImageAll(id:Int, context:Context){
 *  수정할 id   : tb_image id
 *  context     : context
 * */
+@SuppressLint("Recycle")
 fun deleteImage(id:Int, context:Context){
     val db = DBHelper(context).writableDatabase
-    db.execSQL("delete from $DB_IMAGE " + "where _id=?", arrayOf<Any?>(id))
+    db.execSQL("delete from $DB_IMAGE where _id=?", arrayOf<Any?>(id))
     db.close()
 }
 
@@ -124,9 +130,10 @@ fun deleteImage(id:Int, context:Context){
 *  content     : 수정 내용
 *  context     : context
 * */
+@SuppressLint("Recycle")
 fun updateMemo(id:Int, title:String, content:String, context:Context){
     val db = DBHelper(context).writableDatabase
-    db.execSQL("update $DB_TABLE set $TITLE=?, $CONTENT=? " + "where _id=?", arrayOf<Any?>(title,content,id))
+    db.execSQL("update $DB_TABLE set $TITLE=?, $CONTENT=? where _id=?", arrayOf<Any?>(title,content,id))
     db.close()
 }
 
@@ -134,8 +141,9 @@ fun updateMemo(id:Int, title:String, content:String, context:Context){
 *  tb_memo 모든 데이터 가져오기
 *  return 값 : MemoVO
 */
+/*@SuppressLint("Recycle")
 fun selectMemo(context:Context):MutableList<MemoVO>{
-    var list:MutableList<MemoVO> = mutableListOf()
+    val list:MutableList<MemoVO> = mutableListOf()
     val helper = DBHelper(context)
     val db = helper.readableDatabase
     val cursor = db.rawQuery("select * from $DB_TABLE order by _id desc",null)
@@ -144,14 +152,15 @@ fun selectMemo(context:Context):MutableList<MemoVO>{
         list.add(MemoVO(cursor.getInt(0),cursor.getString(1),cursor.getString(2)))
     }
     return list
-}
+}*/
 
 /* select
 *  tb_memo 모든 데이터 가져오기
 *  return 값 : MemoImageVO
 */
+/*@SuppressLint("Recycle")
 fun selectImage(context:Context):MutableList<MemoImageVO>{
-    var list:MutableList<MemoImageVO> = mutableListOf()
+    val list:MutableList<MemoImageVO> = mutableListOf()
     val helper = DBHelper(context)
     val db = helper.readableDatabase
     val cursor = db.rawQuery("select * from $DB_IMAGE order by _id desc",null)
@@ -160,14 +169,15 @@ fun selectImage(context:Context):MutableList<MemoImageVO>{
         list.add(MemoImageVO(cursor.getInt(0),cursor.getInt(1),cursor.getString(2)))
     }
     return list
-}
+}*/
 
 /* select
 *  가장 최근에 들어간 메모 가져오기
 *  return 값 : MemoVO
 */
+@SuppressLint("Recycle")
 fun selectMemoId(context:Context):MutableList<MemoVO>{
-    var list:MutableList<MemoVO> = mutableListOf()
+    val list:MutableList<MemoVO> = mutableListOf()
     val helper = DBHelper(context)
     val db = helper.readableDatabase
     val cursor = db.rawQuery("select * from $DB_TABLE order by _id desc limit 1",null)
@@ -183,8 +193,9 @@ fun selectMemoId(context:Context):MutableList<MemoVO>{
 *  id        : memoVO id
 *  return 값 : MemoImageVO
 */
+@SuppressLint("Recycle")
 fun selectMemoImageList(id:Int, context:Context):MutableList<MemoImageVO>{
-    var list:MutableList<MemoImageVO> = mutableListOf()
+    val list:MutableList<MemoImageVO> = mutableListOf()
     val helper = DBHelper(context)
     val db = helper.readableDatabase
     val cursor = db.rawQuery("select * from $DB_IMAGE where $MEMOID = ? order by _id asc ", arrayOf(id.toString()))
@@ -199,8 +210,9 @@ fun selectMemoImageList(id:Int, context:Context):MutableList<MemoImageVO>{
 *  id        : memoVO id
 *  return 값 : MemoVO
 */
+@SuppressLint("Recycle")
 fun selectMemo(id:Int, context:Context):MutableList<MemoVO>{
-    var list:MutableList<MemoVO> = mutableListOf()
+    val list:MutableList<MemoVO> = mutableListOf()
     val helper = DBHelper(context)
     val db = helper.readableDatabase
     val cursor = db.rawQuery("select * from $DB_TABLE where _id = ? order by _id asc ", arrayOf(id.toString()))
@@ -214,8 +226,9 @@ fun selectMemo(id:Int, context:Context):MutableList<MemoVO>{
 *  모든 메모의 정보와 메모에 첨부된 첫번째 이미지 가져오기
 *  return 값 : MemoMainVO
 */
+@SuppressLint("Recycle")
 fun selectALL(context:Context):MutableList<MemoMainVO>{
-    var list:MutableList<MemoMainVO> = mutableListOf()
+    val list:MutableList<MemoMainVO> = mutableListOf()
     val helper = DBHelper(context)
     val db = helper.readableDatabase
     val cursor = db.rawQuery("select * from $DB_TABLE as a " +

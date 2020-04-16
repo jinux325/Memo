@@ -30,7 +30,7 @@
     <TextView
         android:id="@+id/detail_content"
         android:layout_width="match_parent"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_height="0dp"
         android:textSize="18sp"
         android:layout_marginTop="5dp"
@@ -39,7 +39,7 @@
         android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@+id/detail_background"
         app:layout_constraintBottom_toTopOf="@+id/detail_background_view"
-        />
+        tools:ignore="TextViewEdits" />
 
     <View
         android:id="@+id/detail_background_view"
@@ -69,11 +69,11 @@
         android:background="@drawable/button"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:windowSoftInputMode="adjustResize"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        tools:ignore="HardcodedText" />
     <Button
         android:id="@+id/detail_update"
         android:layout_width="wrap_content"
@@ -84,8 +84,9 @@
         android:background="@drawable/button"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginRight="10dp"
-        android:windowSoftInputMode="adjustResize" />
+        android:layout_marginEnd="10dp"
+        android:windowSoftInputMode="adjustResize"
+        tools:ignore="HardcodedText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout >

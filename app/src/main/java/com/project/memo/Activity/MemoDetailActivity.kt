@@ -8,33 +8,30 @@ import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.project.memo.Adapter.*
 import com.project.memo.R
 import com.project.memo.VO.MemoImageVO
 import com.project.memo.VO.MemoVO
-import kotlinx.android.synthetic.main.activity_add_memo.*
 import kotlinx.android.synthetic.main.activity_memo_detail.*
 import java.io.File
-import java.nio.file.Files.delete
 
 class MemoDetailActivity : AppCompatActivity() {
 
-    val TAG:String = "MemoDetailActivity"
-    var imageList : MutableList<String> = mutableListOf()          // viewPagerAdapter에 보낼 imageList
-    var dbImageList : MutableList<MemoImageVO> = mutableListOf()   // DB에서 select해온 image list
-    var list:MutableList<MemoVO> = mutableListOf()                  // 메모 (제목, 내용) list
-    var id:Int? = null
-    var title =""
-    var content =""
-    var image =""
+    private val TAG:String = "MemoDetailActivity"
+    private var imageList : MutableList<String> = mutableListOf()          // viewPagerAdapter에 보낼 imageList
+    private var dbImageList : MutableList<MemoImageVO> = mutableListOf()   // DB에서 select해온 image list
+    private var list:MutableList<MemoVO> = mutableListOf()                  // 메모 (제목, 내용) list
+    private var id:Int? = null
+    private var title =""
+    private var content =""
+    private var image =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memo_detail)
 
         // 내용 textview 스크롤
-        detail_content.setMovementMethod(ScrollingMovementMethod());
+        detail_content.movementMethod = ScrollingMovementMethod()
 
         // 메모 삭제버튼
         detail_delete.setOnClickListener {
@@ -58,15 +55,15 @@ class MemoDetailActivity : AppCompatActivity() {
         detailSelect()
     }
 
-    fun detailSelect(){
+    private fun detailSelect(){
         imageList.clear()
         id = intent.extras.getInt("id")
         dbImageList = selectMemoImageList(id!!,this) // 클릭한 메모 image list 가져오기
 
         list = selectMemo(id!!,this) // 클릭한 제목, 내용 가져오기
 
-        title = list.get(0).title
-        content = list.get(0).content
+        title = list[0].title
+        content = list[0].content
 
         // 가져온 리스트를 경로만 빼서 List에 넣기
         for(img in dbImageList){
@@ -76,15 +73,15 @@ class MemoDetailActivity : AppCompatActivity() {
         // 이미지가 0개 viewPager GONE
         // 이미지 1개 이상 viewPager VISIBLE
         if (imageList.size != 0){
-            detail_viewPager.setVisibility(View.VISIBLE)
-            detail_background_view.setVisibility(View.VISIBLE)
+            detail_viewPager.visibility = View.VISIBLE
+            detail_background_view.visibility = View.VISIBLE
         }else{
-            detail_viewPager.setVisibility(View.GONE)
-            detail_background_view.setVisibility(View.GONE)
+            detail_viewPager.visibility = View.GONE
+            detail_background_view.visibility = View.GONE
         }
 
-        detail_title.setText(title)
-        detail_content.setText(content)
+        detail_title.text = title
+        detail_content.text = content
 
         // adapter에 list 보내서 출력
         detail_viewPager.adapter = ViewPagerDetailAdapter(this, imageList)
@@ -92,8 +89,8 @@ class MemoDetailActivity : AppCompatActivity() {
     }
 
     // 삭제 확인/취소 다이얼로그
-    fun deleteMemo(){
-        var dialog = AlertDialog.Builder(this)
+    private fun deleteMemo(){
+        val dialog = AlertDialog.Builder(this)
         dialog.setTitle("메모를 삭제하시겠습니까?")
 
         fun memoDelete(){
@@ -101,25 +98,25 @@ class MemoDetailActivity : AppCompatActivity() {
             deleteImageAll(id!!,this)   // 메모이미지 테이블에 이미지 전부 삭제
             finish()
         }
-        for(i in 0..imageList.size-1){
+        for(i in 0 until imageList.size){
             Log.d("@@@@ ","  $i")
             imageFileDelete(i)
         }
-        var dialog_listener = object: DialogInterface.OnClickListener{
+        val dialogListener = object: DialogInterface.OnClickListener{
             override fun onClick(dialog: DialogInterface?, p1: Int) {
                 when(p1){
                     DialogInterface.BUTTON_POSITIVE -> memoDelete()
                 }
             }
         }
-        dialog.setPositiveButton("확인",dialog_listener)
-        dialog.setNegativeButton("취소",dialog_listener)
+        dialog.setPositiveButton("확인",dialogListener)
+        dialog.setNegativeButton("취소",dialogListener)
         dialog.show()
 
     }
     // 이미지 파일 삭제
-    fun imageFileDelete(position:Int){
-        var file = File(imageList.get(position))
+    private fun imageFileDelete(position:Int){
+        val file = File(imageList[position])
         if(file.exists()){
             file.delete()
         }else{
